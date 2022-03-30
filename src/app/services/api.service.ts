@@ -31,7 +31,6 @@ export class ApiService {
     });
 
     if (searchItem !== null) {
-      console.log('there is a string');
       params = params.set('search', searchItem);
     }
 
