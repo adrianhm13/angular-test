@@ -1,0 +1,112 @@
+<div class="table-container">
+
+  <mat-form-field>
+    <mat-label>Search</mat-label>
+    <input matInput #inputSearch/>
+    <mat-hint>Press enter to search the item</mat-hint>
+  </mat-form-field>
+  <div class="spinner-container">
+    <mat-spinner
+      [diameter]="50"
+      *ngIf="dataSource.loading$ | async"
+    ></mat-spinner>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Image Column -->
+    <ng-container matColumnDef="image">
+      <th mat-header-cell *matHeaderCellDef>Picure</th>
+      <td mat-cell *matCellDef="let element">
+        <img src="{{ element.images[0].src }}" alt="product" />
+      </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <!-- Sku Column -->
+    <ng-container matColumnDef="sku">
+      <th mat-header-cell *matHeaderCellDef>Sku</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.sku ? element.sku : "-" }}
+      </td>
+    </ng-container>
+
+    <!-- Inventory Column -->
+    <ng-container matColumnDef="inventory">
+      <th mat-header-cell *matHeaderCellDef>Inventory</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-template
+          [ngIf]="dataUtil.stockStatusStyle(element.stock_status)"
+          [ngIfElse]="stockFalse"
+        >
+          <span style="color: green">In Stock</span>
+        </ng-template>
+        <ng-template #stockFalse>
+          <span style="color: darkred">No Stock</span>
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let element">
+        {{ dataUtil.formatPrice(element.price) }}
+      </td>
+    </ng-container>
+
+    <!-- Categories Column -->
+    <ng-container matColumnDef="categories">
+      <th mat-header-cell *matHeaderCellDef>Categories</th>
+      <td mat-cell *matCellDef="let element">
+        <p *ngFor="let category of element.categories">{{ category.name }}</p>
+      </td>
+    </ng-container>
+
+    <!-- Tags Creation Column -->
+    <ng-container matColumnDef="tags">
+      <th mat-header-cell *matHeaderCellDef>Tags</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-template [ngIf]="element.tags.length" [ngIfElse]="tagsEmpty">
+          <p *ngFor="let tag of element.tags">{{ tag }}</p>
+        </ng-template>
+        <ng-template #tagsEmpty>
+          <span>-</span>
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <!-- Featured Column -->
+    <ng-container matColumnDef="featured">
+      <th mat-header-cell *matHeaderCellDef>Featured</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-template [ngIf]="element.featured" [ngIfElse]="featuredFalse">
+          <mat-icon color="primary">star_outline</mat-icon>
+        </ng-template>
+        <ng-template #featuredFalse>
+          <mat-icon color="primary">star</mat-icon>
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <!-- Date Creation Column -->
+    <ng-container matColumnDef="date_created">
+      <th mat-header-cell *matHeaderCellDef>Date Creation</th>
+      <td mat-cell *matCellDef="let element">
+        <p>Published in</p>
+        <p>{{ dataUtil.formatDate(element.date_created_gmt) }}</p>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 15, 20]"
+    [length]="1000"
+  ></mat-paginator>
+</div>

@@ -1,0 +1,52 @@
+<form class="form-login" (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+  <mat-form-field appearance="fill" hideRequiredMarker>
+    <mat-label>Email</mat-label>
+    <input
+      ngModel
+      name="email"
+      id="email"
+      type="email"
+      matInput
+      required
+      email
+    />
+    <mat-error>Email it's not valid</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" hideRequiredMarker>
+    <mat-label>Password</mat-label>
+    <input
+      ngModel
+      name="password"
+      id="password"
+      type="password"
+      matInput
+      required
+      minlength="6"
+      [type]="hide ? 'password' : 'text'"
+    />
+    <mat-error>Password should be 6 characters minimum.</mat-error>
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+  </mat-form-field>
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    [disabled]="!loginForm.valid"
+  >
+    {{ this.isLoading ? "Loading" : "Login" }}
+  </button>
+  <mat-error>{{ error }}</mat-error>
+</form>
+<div class="footer">
+  <p class="mat-subheading-1">You don't have an account?</p>
+  <button mat-raised-button color="primary" (click)="onClick()">Sign Up</button>
+</div>

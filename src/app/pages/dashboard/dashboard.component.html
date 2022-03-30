@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="form-container">
+    <form class="woo-api" #credentials="ngForm">
+      <mat-form-field hideRequiredMarker>
+        <mat-label>User's Key</mat-label>
+        <input
+          ngModel
+          name="userKey"
+          id="userKey"
+          type="userKey"
+          matInput
+          required
+          [type]="hide ? 'password' : 'text'"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field hideRequiredMarker>
+        <mat-label>User's Secret Key</mat-label>
+        <input
+          ngModel
+          name="userSecretKey"
+          id="userSecretKey"
+          type="userSecretKey"
+          matInput
+          required
+          [type]="hide ? 'password' : 'text'"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field hideRequiredMarker>
+        <mat-label>Website</mat-label>
+        <input
+          type="url"
+          ngModel
+          name="website"
+          id="website"
+          type="website"
+          matInput
+          required
+        />
+        <mat-hint>Example: https://atum.betademo.es/</mat-hint>
+      </mat-form-field>
+    </form>
+    <button
+      type="button"
+      (click)="onSubmit(credentials)"
+      [disabled]="!credentials.valid"
+      mat-raised-button
+      color="primary"
+    >
+      Submit
+    </button>
+  </div>
+  <app-table-products></app-table-products>
+</div>

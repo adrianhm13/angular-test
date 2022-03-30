@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "berebeltest-7759e": {
+      "hosting": {
+        "be-rebel": [
+          "berebeltest-7759e"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "berebeltest-7759e"
+  }
+}

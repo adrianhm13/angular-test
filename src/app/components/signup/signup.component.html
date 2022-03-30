@@ -1,0 +1,69 @@
+<form
+  class="form-signup"
+  (ngSubmit)="onSubmit(registerForm)"
+  #registerForm="ngForm"
+>
+  <mat-form-field appearance="fill" hideRequiredMarker>
+    <mat-label>Username</mat-label>
+    <input
+      ngModel
+      name="username"
+      id="username"
+      type="text"
+      matInput
+      required
+      minlength="3"
+    />
+    <mat-error>Username should be 3 characters min.</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" hideRequiredMarker>
+    <mat-label>Email</mat-label>
+    <input
+      ngModel
+      name="email"
+      id="email"
+      type="email"
+      matInput
+      required
+      email
+    />
+    <mat-error>Email it's not valid</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" hideRequiredMarker>
+    <mat-label>Password</mat-label>
+    <input
+      ngModel
+      name="password"
+      id="password"
+      type="password"
+      matInput
+      [type]="hide ? 'password' : 'text'"
+      required
+      minlength="6"
+    />
+    <mat-error>Password should be 6 characters min</mat-error>
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+  </mat-form-field>
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    [disabled]="!registerForm.valid"
+  >
+    {{ this.isLoading ? "Loading" : "Signup" }}
+  </button>
+  <mat-error>{{ error }}</mat-error>
+</form>
+<div class="footer">
+  <p class="mat-subheading-1">Already signup?</p>
+  <button mat-raised-button color="primary" (click)="onClick()">Login</button>
+</div>

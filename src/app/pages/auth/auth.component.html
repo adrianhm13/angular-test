@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="form">
+    <h3 *ngIf="router.url === '/login'" class="mat-headline" color="primary">Login</h3>
+    <h3 *ngIf="router.url === '/signup'" class="mat-headline" color="primary">Sign up</h3>
+    <button mat-fab disabled>
+      <mat-icon color="primary">lock</mat-icon>
+    </button>
+    <div class="signin">
+        <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

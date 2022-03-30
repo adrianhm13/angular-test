@@ -1,0 +1,22 @@
+.table-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+mat-form-field {
+  align-self: flex-end;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+img {
+  width: 50px;
+  margin-top: 5px;
+}
